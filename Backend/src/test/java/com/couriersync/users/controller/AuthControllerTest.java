@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -25,13 +26,13 @@ class AuthControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
-    @MockBean
+    @MockitoBean
     private AuthService authService;
 
-    @MockBean
+    @MockitoBean
     private SignUpService signUpService;
 
-    @MockBean
+    @MockitoBean
     private JwtService jwtService;
 
     // GET /user
@@ -48,16 +49,16 @@ class AuthControllerTest {
     // POST /login (éxito sin MFA)
     @Test
     void testLoginSuccess() throws Exception {
-        Mockito.when(authService.authenticate("juan", "1234", "ADMIN")).thenReturn(true);
+        Mockito.when(authService.authenticate("juan", "1234", 1)).thenReturn(true);
 
         Usuario user = new Usuario();
         user.setCedula("111");
         user.setUsuario("juan");
-        user.setRol("ADMIN");
+        user.setRol(1);
         user.setMfaEnabled(false);
 
         Mockito.when(authService.findByUsuario("juan")).thenReturn(user);
-        Mockito.when(jwtService.generateToken("111", "juan", "ADMIN")).thenReturn("fake-jwt");
+        Mockito.when(jwtService.generateToken("111", "juan", 1)).thenReturn("fake-jwt");
 
         String body = """
             {
