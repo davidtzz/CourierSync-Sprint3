@@ -1,0 +1,94 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 208 58% 8%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 208 58% 8%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 208 58% 8%;
+
+    --primary: 208 58% 8%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 208 30% 95%;
+    --secondary-foreground: 208 58% 8%;
+
+    --muted: 208 20% 96%;
+    --muted-foreground: 208 20% 45%;
+
+    --accent: 20 89% 53%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 208 20% 90%;
+    --input: 208 20% 90%;
+    --ring: 20 89% 53%;
+
+    --radius: 0.75rem;
+
+    --success: 142 71% 45%;
+    --warning: 38 92% 50%;
+    --info: 199 89% 48%;
+
+    --gradient-primary: linear-gradient(135deg, hsl(208 58% 8%), hsl(208 45% 15%));
+    --gradient-accent: linear-gradient(135deg, hsl(20 89% 53%), hsl(20 89% 63%));
+    --shadow-soft: 0 4px 6px -1px hsl(208 58% 8% / 0.1), 0 2px 4px -1px hsl(208 58% 8% / 0.06);
+    --shadow-medium: 0 10px 15px -3px hsl(208 58% 8% / 0.1), 0 4px 6px -2px hsl(208 58% 8% / 0.05);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  }
+}
+
+@layer utilities {
+  .gradient-primary {
+    background: var(--gradient-primary);
+  }
+  
+  .gradient-accent {
+    background: var(--gradient-accent);
+  }
+  
+  .shadow-soft {
+    box-shadow: var(--shadow-soft);
+  }
+  
+  .shadow-medium {
+    box-shadow: var(--shadow-medium);
+  }
+  
+  .animate-fade-in {
+    animation: fade-in 0.4s ease-out;
+  }
+  
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
